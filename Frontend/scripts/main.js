@@ -7,8 +7,6 @@ function createTask() {
         body: JSON.stringify({
             'name' : taskName,
         })
-    }).then(function(response){
-        console.log(response.json())
     });
     //location.reload();
 }
