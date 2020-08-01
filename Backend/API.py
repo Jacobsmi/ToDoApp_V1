@@ -21,5 +21,13 @@ def createtask():
             return 'Success'
     return "Unsuccessful"
 
+# Retrieves all tasks from the database
+@API.route('/alltasks', methods=["GET"])
+def get_all_tasks():
+    # Gets all tasks from the database controller
+    result = task_db.get_all_tasks()
+    # Returns them as JSON
+    return jsonify(result)
+
 if __name__ == "__main__":
     API.run(debug=True)

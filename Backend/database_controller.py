@@ -25,3 +25,13 @@ class Database:
             return 1
         except:
             return 0
+    
+    def get_all_tasks(self):
+        try: 
+            conn = self.get_connection()
+            cur = conn.cursor()
+            cur.execute("SELECT rowid,* FROM tasks")
+            rows = cur.fetchall()
+            return list(rows)
+        except:
+            return 0
