@@ -29,5 +29,12 @@ def get_all_tasks():
     # Returns them as JSON
     return jsonify(result)
 
+@API.route('/deleteTask' , methods=['DELETE'])
+def deleteTask():
+    result = task_db.delete_task(request.json['id'])
+    if result == 1:
+        return 'Success'
+    return 'Fail' 
+
 if __name__ == "__main__":
     API.run(debug=True)

@@ -35,3 +35,18 @@ class Database:
             return list(rows)
         except:
             return 0
+    
+
+    def delete_task(self, id):
+        try:
+            sql_statement = "DELETE FROM tasks WHERE rowid = ?"
+            conn = self.get_connection()
+            cur = conn.cursor()
+            cur.execute(sql_statement,[id])
+            conn.commit()
+            cur.execute('VACUUM')
+            conn.commit()
+            cur.close()
+            return 1
+        except:
+            return 0
