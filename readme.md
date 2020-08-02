@@ -2,10 +2,12 @@
 
 ## Currently Working on
 
-- Creating delete buttons for all the tasks
+- Speed up page load/reload time
+- Styling
 
 ## Completed
 
+- Created delete buttons for all the tasks
 - Can reteive all tasks that have been stored in the database by using a GET fetch and receiving all the tasks from the
 backend as JSON parsing them and displaying them
 - Can add a task to the database using the by using the frontend to send a POST request to the backend
