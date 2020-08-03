@@ -16,7 +16,7 @@ class Database:
     
     def insert_new_task(self, task_info):
         try:
-            sql_statement = "INSERT INTO tasks VALUES(?)"
+            sql_statement = "INSERT INTO tasks(task_name) VALUES(?)"
             conn = self.get_connection()
             cur = conn.cursor()
             cur.execute(sql_statement,task_info)

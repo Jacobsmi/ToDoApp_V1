@@ -5,6 +5,7 @@ window.onload = async function() {
     displayTasks(response);
 };
 
+
 // Async function to get the full list of tasks from API
 async function getAllTasks() {
     // Executes a GET fetch to the API and awaits it to store results in response
@@ -80,6 +81,19 @@ async function createTask() {
 function imageClick() {
     const classes = document.querySelector("#cancel-task-button").classList["value"];
     if (classes.includes("d-none")) {
+        /*
+        If more elements are added then this could be used
+        
+        
+        addElements = document.querySelectorAll(".add-element");
+        addElements.forEach(function(element){
+            element.classList.remove("d-none");
+        });
+        displayElements = document.querySelectorAll(".display-element");
+        displayElements.forEach(function(element){
+            element.classList.add("d-none");
+        });
+        */
         document.querySelector("#cancel-task-button").classList.remove("d-none");
         document.querySelector("#add-task-button").classList.add("d-none");
         document.querySelector("#task-form").classList.remove("d-none");

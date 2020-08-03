@@ -20,6 +20,23 @@ body {
 }
 
 #task-list-table {
-    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50vw;
+    background-color: #2A9D8F;
     text-align: center;
+    border: none;
+    border-collapse: collapse
+}
+
+#task-list-table th {
+    border: 1px solid#000;
+}
+
+#task-list-table td {
+    border-left: 1px solid #000;
+}
+
+#task-list-table td:first-child {
+    border-left: none;
 }

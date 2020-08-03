@@ -4,6 +4,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 
 from database_controller import Database
+
 # Create an instance of the API
 API = Flask(__name__)
 

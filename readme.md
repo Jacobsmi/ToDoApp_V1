@@ -4,6 +4,11 @@
 
 - Styling the table
 
+## To Do Ideas
+
+- Create a Taskbar
+- Add a date to the task section
+
 ## Completed
 
 - Created actions for button
