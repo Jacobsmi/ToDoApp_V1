@@ -9,11 +9,11 @@ window.onload = async function() {
 // Async function to get the full list of tasks from API
 async function getAllTasks() {
     // Executes a GET fetch to the API and awaits it to store results in response
-    const response = await fetch('http://127.0.0.1:5000/alltasks')
-        // Parses the body json into an array
-    responseJSON = await response.json()
-        // Returns the array
-    return responseJSON
+    const response = await fetch('http://127.0.0.1:5000/alltasks');
+    // Parses the body json into an array
+    responseJSON = await response.json();
+    // Returns the array
+    return responseJSON;
 }
 
 
@@ -30,7 +30,7 @@ async function displayTasks(response) {
         if (element[2] === 0) {
             taskHTML += `<input type="checkbox" class="completed-check" id="${element[0]}"></td>`;
         } else {
-            taskHTML += `<input type="checkbox" class="completed-check" id="${element[0]}" checked></td>`;
+            taskHTML += `<input type="checkbox" class="completed-check" id="${element[0]}" checke></td>`;
 
         }
         taskHTML += `<td>${element[0]}</td><td>${element[1]}</td>

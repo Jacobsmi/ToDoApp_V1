@@ -7,7 +7,8 @@
 ## To Do
 
 - Create a Taskbar
-- Add a date to the task section
+- Add a date to the task section/Better add task function
+
 
 ## Completed
 
