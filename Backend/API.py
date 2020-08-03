@@ -37,5 +37,17 @@ def deleteTask():
         return 'Success'
     return 'Fail' 
 
+@API.route('/completetask' , methods=['PUT'])
+def completeTask():
+    if request.method == "PUT":
+        try:
+            rowid = int(request.json['id'])
+            completed = int(request.json['completed'])
+            print(task_db.update_completed([completed, rowid]))
+            return "Success"
+        except:
+            return "Unsuccesful"
+    return "Unsuccesful"
+
 if __name__ == "__main__":
     API.run(debug=True)

@@ -50,3 +50,15 @@ class Database:
             return 1
         except:
             return 0
+    
+    def update_completed(self, task_info):
+        try:
+            sql_statement = "UPDATE tasks SET completed = ? WHERE rowid = ?"
+            conn = self.get_connection()
+            cur = conn.cursor()
+            cur.execute(sql_statement,task_info)
+            conn.commit()
+            cur.close()
+            return 1
+        except:
+            return 0

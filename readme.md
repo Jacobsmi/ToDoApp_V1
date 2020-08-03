@@ -2,15 +2,16 @@
 
 ## Currently Working on
 
-- Styling the table
+- Add better return JSON from the API for validation client-side
 
-## To Do Ideas
+## To Do
 
 - Create a Taskbar
 - Add a date to the task section
 
 ## Completed
 
+- Adding completed functionality
 - Created actions for button
   - Hiding table
   - Showing input

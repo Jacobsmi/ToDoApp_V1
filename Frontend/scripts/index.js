@@ -21,19 +21,35 @@ async function getAllTasks() {
 async function displayTasks(response) {
     taskHTML = `<table id="task-list-table">
     <tr>
-        <th>Task Number</th><th>Task Name</th><th>Delete</th>
+        <th>Completed</th><th>Task Number</th><th>Task Name</th><th>Delete</th>
     </tr>`;
     // Loops through each element received in the response
     response.forEach(element => {
         // Creates a string for it the element with its information
-        taskHTML += `<tr><td>${element[0]}</td><td>${element[1]}</td>
+        taskHTML += '<tr><td>'
+        if (element[2] === 0) {
+            taskHTML += `<input type="checkbox" class="completed-check" id="${element[0]}"></td>`;
+        } else {
+            taskHTML += `<input type="checkbox" class="completed-check" id="${element[0]}" checked></td>`;
+
+        }
+        taskHTML += `<td>${element[0]}</td><td>${element[1]}</td>
         <td> <button type="button" class="delete-button" id="delete-${element[0]}">Delete</button></td></tr>`
 
     });
-    taskHTML += '</table>'
-        // Sets the HTML for the task-list div equal to the HTML for all the items
+    taskHTML += '</table>';
+
+    // Sets the HTML for the task-list div equal to the HTML for all the items
     document.querySelector("#task-list").innerHTML = taskHTML;
-    // Calls the delete button click handler when any of the delete buttons are clicked
+    // Adds eventlistener to all completed checkboxes and 
+    // calls the checkBox click handler when any of the checkBoxes are clicked
+    document.querySelectorAll(".completed-check").forEach(element => {
+        element.addEventListener("click", function() {
+            completedClick(element);
+        });
+    });
+    // Adds eventlistener to all delete buttons and 
+    // calls the delete button click handler when any of the delete buttons are clicked
     document.querySelectorAll(".delete-button").forEach(element => {
         element.addEventListener("click", deleteClick);
     });
@@ -41,6 +57,33 @@ async function displayTasks(response) {
 }
 
 
+//
+async function completedClick(element) {
+    var completed;
+    if (element.checked) {
+        console.log("Task num " + element.id + " completed");
+        completed = 1;
+    } else {
+        console.log("Task num " + element.id + " not completed");
+        completed = 0;
+    }
+    await updateCompletion(parseInt(element.id), completed)
+}
+
+
+async function updateCompletion(id, completed) {
+    const data = {
+        'id': id,
+        'completed': completed,
+    }
+    await fetch('http://127.0.0.1:5000/completetask', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+}
 // Handles the delete button clicks
 async function deleteClick() {
     buttonIDNum = this.id.split("-")[1];
