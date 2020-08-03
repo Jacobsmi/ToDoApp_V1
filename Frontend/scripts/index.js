@@ -1,19 +1,17 @@
-// Calls the load function when the window loads
-window.onload = async function () {
+window.onload = async function() {
     // Calls the function that makes a get to the API to load all the current tasks
     var response = await getAllTasks();
     // Calls function that parses all tasks and displays them
     displayTasks(response);
 };
 
-
 // Async function to get the full list of tasks from API
 async function getAllTasks() {
     // Executes a GET fetch to the API and awaits it to store results in response
     const response = await fetch('http://127.0.0.1:5000/alltasks')
-    // Parses the body json into an array
+        // Parses the body json into an array
     responseJSON = await response.json()
-    // Returns the array
+        // Returns the array
     return responseJSON
 }
 
@@ -38,7 +36,7 @@ async function displayTasks(response) {
 
 
 // Handles the delete button clicks
-async function deleteClick(){
+async function deleteClick() {
     buttonIDNum = this.id.split("-")[1];
     await fetch('http://127.0.0.1:5000/deleteTask', {
         method: 'DELETE',
@@ -46,7 +44,7 @@ async function deleteClick(){
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            'id':buttonIDNum,
+            'id': buttonIDNum,
         })
     });
     location.reload();
@@ -70,4 +68,10 @@ async function createTask() {
         body: JSON.stringify(data)
     });
     location.reload();
+}
+
+
+function imageClick() {
+    document.querySelector("#task-form").style.display = "block";
+    document.querySelector("#task-list").style.display = "none";
 }

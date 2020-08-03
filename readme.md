@@ -4,6 +4,9 @@
 
 - Speed up page load/reload time
 - Styling
+- Creating actions for button
+  - Hiding table
+  - Showing input
 
 ## Completed
 
