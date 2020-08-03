@@ -70,8 +70,18 @@ async function createTask() {
     location.reload();
 }
 
-
+//
 function imageClick() {
-    document.querySelector("#task-form").style.display = "block";
-    document.querySelector("#task-list").style.display = "none";
+    const classes = document.querySelector("#cancel-task-button").classList["value"];
+    if (classes.includes("d-none")) {
+        document.querySelector("#cancel-task-button").classList.remove("d-none");
+        document.querySelector("#add-task-button").classList.add("d-none");
+        document.querySelector("#task-form").classList.remove("d-none");
+        document.querySelector("#task-list").classList.add("d-none");
+    } else {
+        document.querySelector("#cancel-task-button").classList.add("d-none");
+        document.querySelector("#add-task-button").classList.remove("d-none");
+        document.querySelector("#task-form").classList.add("d-none");
+        document.querySelector("#task-list").classList.remove("d-none");
+    }
 }

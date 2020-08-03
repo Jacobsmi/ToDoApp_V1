@@ -8,13 +8,13 @@ body {
     text-align: center;
 }
 
-#task-form {
-    display: none;
-}
-
-#add-task-button {
+.task-buttons {
     position: fixed;
     bottom: 10;
     left: 10;
     width: 5vh;
+}
+
+.d-none {
+    display: none;
 }

@@ -8,7 +8,7 @@
 <body>
     <h1 id="main-title">To Do App</h1>
 
-    <div id="task-form">
+    <div id="task-form" class="d-none">
         Task Name:<input type="text" id="task-name">
         <button type="button" id="submit-task-form">Submit</button>
     </div>
@@ -17,7 +17,10 @@
 
     </div>
 
-    <div onclick="imageClick()"><img src='resources/add_button.png' id='add-task-button'></div>
+    <div onclick="imageClick()">
+        <img src='resources/add_button.png' class='task-buttons' id='add-task-button'>
+        <img src='resources/cancel_button.png' class='task-buttons d-none' id='cancel-task-button'>
+    </div>
 
 
     <script src="./scripts/index.js"></script>
