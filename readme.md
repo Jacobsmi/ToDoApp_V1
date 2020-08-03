@@ -2,14 +2,13 @@
 
 ## Currently Working on
 
-- Speed up page load/reload time
-- Styling
-- Creating actions for button
-  - Hiding table
-  - Showing input
+- Styling the table
 
 ## Completed
 
+- Created actions for button
+  - Hiding table
+  - Showing input
 - Created delete buttons for all the tasks
 - Can reteive all tasks that have been stored in the database by using a GET fetch and receiving all the tasks from the
 backend as JSON parsing them and displaying them

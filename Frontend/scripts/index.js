@@ -16,16 +16,21 @@ async function getAllTasks() {
 }
 
 
-// Displays all tasks by looping through each element received in the response
+// Displays all tasks in a table by looping through each element received in the response
 async function displayTasks(response) {
-    taskHTML = "";
+    taskHTML = `<table id="task-list-table">
+    <tr>
+        <th>Task Number</th><th>Task Name</th><th>Delete</th>
+    </tr>`;
     // Loops through each element received in the response
     response.forEach(element => {
         // Creates a string for it the element with its information
-        taskHTML += `Task Number: ${element[0]} Task Name: ${element[1]}<button type="button" class="delete-button" id="delete-${element[0]}">Delete</button><br>`
+        taskHTML += `<tr><td>${element[0]}</td><td>${element[1]}</td>
+        <td> <button type="button" class="delete-button" id="delete-${element[0]}">Delete</button></td></tr>`
 
     });
-    // Sets the HTML for the task-list div equal to the HTML for all the items
+    taskHTML += '</table>'
+        // Sets the HTML for the task-list div equal to the HTML for all the items
     document.querySelector("#task-list").innerHTML = taskHTML;
     // Calls the delete button click handler when any of the delete buttons are clicked
     document.querySelectorAll(".delete-button").forEach(element => {
@@ -70,7 +75,8 @@ async function createTask() {
     location.reload();
 }
 
-//
+
+// Controls what happens when the add button on the bottom of the screen is pushed
 function imageClick() {
     const classes = document.querySelector("#cancel-task-button").classList["value"];
     if (classes.includes("d-none")) {

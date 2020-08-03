@@ -18,3 +18,8 @@ body {
 .d-none {
     display: none;
 }
+
+#task-list-table {
+    border: 1px solid black;
+    text-align: center;
+}
