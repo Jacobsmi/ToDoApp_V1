@@ -3,6 +3,7 @@
 ## Currently Working on
 
 - Add better return JSON from the API for validation client-side
+  - Can now detect the difference between good get from db, good get with no data, and bad get
 
 ## To Do
 

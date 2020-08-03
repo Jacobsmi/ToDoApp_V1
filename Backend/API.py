@@ -25,14 +25,14 @@ def createtask():
 # Retrieves all tasks from the database
 @API.route('/alltasks', methods=["GET"])
 def get_all_tasks():
-    #return jsonify({})
     try:
         # Gets all tasks from the database controller
         result = task_db.get_all_tasks()
+        print(result)
         # Returns them as JSON
         return jsonify(result)
     except:
-        return "ERROR"
+        return jsonify(error = 'db_get_error')
 
 @API.route('/deleteTask' , methods=['DELETE'])
 def deleteTask():

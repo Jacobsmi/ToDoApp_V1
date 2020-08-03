@@ -1,8 +1,19 @@
-window.onload = async function() {
+window.onload = async function(callback) {
     // Calls the function that makes a get to the API to load all the current tasks
     var response = await getAllTasks();
-    // Calls function that parses all tasks and displays them
-    displayTasks(response);
+
+    if (response['error'] != undefined) {
+        alert("Error connecting to the DB. Please refresh");
+    }
+    // Checks if the list is empty
+    else if (response.length === 0) {
+        // Displays message on empty task list
+        document.querySelector("#task-list").innerHTML = `<h3>No tasks in database</h3><br>
+        <h4>Please add a task by clicking the plus in the bottom left corner</h4>`;
+    } else {
+        // Calls function that parses all tasks and displays them
+        displayTasks(response);
+    }
 };
 
 
@@ -30,7 +41,7 @@ async function displayTasks(response) {
         if (element[2] === 0) {
             taskHTML += `<input type="checkbox" class="completed-check" id="${element[0]}"></td>`;
         } else {
-            taskHTML += `<input type="checkbox" class="completed-check" id="${element[0]}" checke></td>`;
+            taskHTML += `<input type="checkbox" class="completed-check" id="${element[0]}" checked></td>`;
 
         }
         taskHTML += `<td>${element[0]}</td><td>${element[1]}</td>
@@ -102,7 +113,12 @@ async function deleteClick() {
 
 // Calls create task whenever someone clicks the button
 document.querySelector("#submit-task-form").addEventListener("click", createTask);
-
+// Calls create task if you press enter when typing in a task
+document.querySelector("#task-name").addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        createTask();
+    }
+})
 
 // Create an async function(allows for await in function)
 async function createTask() {

@@ -40,3 +40,7 @@ body {
 #task-list-table td:first-child {
     border-left: none;
 }
+
+#task-list {
+    text-align: center;
+}
