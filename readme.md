@@ -7,7 +7,7 @@
 ## To Do
 
 - When plus is hit autofocus onto add task
-- Add status codes to API responses for bad input(400) 
+- Add status codes to API responses for bad input(400)
 - Create a Taskbar
 
 ## Completed

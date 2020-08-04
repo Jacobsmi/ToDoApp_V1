@@ -18,7 +18,7 @@ window.addEventListener('load', async function() {
 
 
 // Async function to get the full list of tasks from API
-async function getAllTasks() {
+const getAllTasks = async() => {
     // Executes a GET fetch to the API and awaits it to store results in response
     const response = await fetch('http://127.0.0.1:5000/alltasks');
     // Parses the body json into an array
@@ -29,7 +29,7 @@ async function getAllTasks() {
 
 
 // Displays all tasks in a table by looping through each element received in the response
-async function displayTasks(response) {
+const displayTasks = async(response) => {
     taskHTML = `<table id="task-list-table">
     <tr>
         <th>Completed</th><th>Task Number</th><th>Task Name</th><th>Delete</th>
@@ -55,21 +55,23 @@ async function displayTasks(response) {
     // Adds eventlistener to all completed checkboxes and 
     // calls the checkBox click handler when any of the checkBoxes are clicked
     document.querySelectorAll(".completed-check").forEach(element => {
-        element.addEventListener("click", function() {
+        element.addEventListener("click", () => {
             completedClick(element);
         });
     });
     // Adds eventlistener to all delete buttons and 
     // calls the delete button click handler when any of the delete buttons are clicked
     document.querySelectorAll(".delete-button").forEach(element => {
-        element.addEventListener("click", deleteClick);
+        element.addEventListener("click", () => {
+            deleteClick(element.id)
+        });
     });
 
 }
 
 
 //
-async function completedClick(element) {
+const completedClick = async(element) => {
     let completed;
     if (element.checked) {
         completed = 1;
@@ -80,7 +82,7 @@ async function completedClick(element) {
 }
 
 
-async function updateCompletion(id, completed) {
+const updateCompletion = async(id, completed) => {
     const data = {
         'id': id,
         'completed': completed,
@@ -98,9 +100,10 @@ async function updateCompletion(id, completed) {
         location.reload();
     }
 }
+
 // Handles the delete button clicks
-async function deleteClick() {
-    buttonIDNum = this.id.split("-")[1];
+const deleteClick = async(id) => {
+    buttonIDNum = id.split("-")[1];
     const response = await fetch('http://127.0.0.1:5000/deleteTask', {
         method: 'DELETE',
         headers: {
@@ -118,17 +121,8 @@ async function deleteClick() {
 }
 
 
-// Calls create task whenever someone clicks the button
-document.querySelector("#submit-task-form").addEventListener("click", createTask);
-// Calls create task if you press enter when typing in a task
-document.querySelector("#task-name").addEventListener("keyup", function(event) {
-    if (event.keyCode === 13) {
-        createTask();
-    }
-})
-
 // Create an async function(allows for await in function)
-async function createTask() {
+const createTask = async() => {
     const data = {
         'name': document.querySelector("#task-name").value,
     }
@@ -148,7 +142,7 @@ async function createTask() {
 
 
 // Controls what happens when the add button on the bottom of the screen is pushed
-function imageClick() {
+const imageClick = () => {
     const classes = document.querySelector("#task-button").classList["value"];
     if (!classes.includes("rotated")) {
         document.querySelector("#task-button").classList.add("rotated");
@@ -160,3 +154,12 @@ function imageClick() {
         document.querySelector("#task-list").classList.remove("d-none");
     }
 }
+
+// Calls create task whenever someone clicks the button
+document.querySelector("#submit-task-form").addEventListener("click", createTask);
+// Calls create task if you press enter when typing in a task
+document.querySelector("#task-name").addEventListener("keyup", event => {
+    if (event.keyCode === 13) {
+        createTask();
+    }
+})
