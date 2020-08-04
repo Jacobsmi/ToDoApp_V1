@@ -15,12 +15,13 @@ task_db = Database('task.db')
 @API.route('/createtask', methods=["POST"])
 def createtask():
     if request.method == "POST":
-        print("RECEIVED POST REQUEST")
-        task_name = request.json['name']
-        db_insert = task_db.insert_new_task([task_name])
-        if db_insert == 1:
-            return 'Success'
-    return "Unsuccessful"
+        try:
+            task_name = request.json['name']
+            db_insert = task_db.insert_new_task([task_name])
+            return jsonify(success = 'success')
+        except:
+            return jsonify(error = 'db_error')
+    return jsonify(error='db_error')
 
 # Retrieves all tasks from the database
 @API.route('/alltasks', methods=["GET"])
@@ -28,18 +29,18 @@ def get_all_tasks():
     try:
         # Gets all tasks from the database controller
         result = task_db.get_all_tasks()
-        print(result)
         # Returns them as JSON
         return jsonify(result)
     except:
-        return jsonify(error = 'db_get_error')
+        return jsonify(error = 'db_error')
 
 @API.route('/deleteTask' , methods=['DELETE'])
 def deleteTask():
-    result = task_db.delete_task(request.json['id'])
-    if result == 1:
-        return 'Success'
-    return 'Fail' 
+    try:
+        result = task_db.delete_task(request.json['id'])
+        return jsonify(success = 'success')
+    except:
+        return jsonify(error='db_error')
 
 @API.route('/completetask' , methods=['PUT'])
 def completeTask():
@@ -48,10 +49,10 @@ def completeTask():
             rowid = int(request.json['id'])
             completed = int(request.json['completed'])
             print(task_db.update_completed([completed, rowid]))
-            return "Success"
+            return jsonify(success = 'success')
         except:
-            return "Unsuccesful"
-    return "Unsuccesful"
+            return jsonify(error='db_error')
+    return jsonify(error='db_error')
 
 if __name__ == "__main__":
     API.run(debug=True)

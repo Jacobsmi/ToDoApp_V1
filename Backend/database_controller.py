@@ -1,9 +1,10 @@
 import sqlite3
 
+
 class Database:
     def __init__(self, name):
         self.db_name = name
-    
+
     def get_connection(self):
         try:
             conn = sqlite3.connect(self.db_name)
@@ -11,54 +12,38 @@ class Database:
             return conn
         except sqlite3.Error as e:
             print("There was a sqlite error")
-            print(e)    
+            print(e)
         return None
-    
+
     def insert_new_task(self, task_info):
-        try:
-            sql_statement = "INSERT INTO tasks(task_name) VALUES(?)"
-            conn = self.get_connection()
-            cur = conn.cursor()
-            cur.execute(sql_statement,task_info)
-            conn.commit()
-            cur.close()
-            return 1
-        except:
-            return 0
-    
+        sql_statement = "INSERT INTO tasks(task_name) VALUES(?)"
+        conn = self.get_connection()
+        cur = conn.cursor()
+        cur.execute(sql_statement, task_info)
+        conn.commit()
+        cur.close()
+
     def get_all_tasks(self):
-        try: 
-            conn = self.get_connection()
-            cur = conn.cursor()
-            cur.execute("SELECT rowid,* FROM tasks")
-            rows = cur.fetchall()
-            return list(rows)
-        except:
-            return 0
-    
+        conn = self.get_connection()
+        cur = conn.cursor()
+        cur.execute("SELECT rowid,* FROM tasks")
+        rows = cur.fetchall()
+        return list(rows)
 
     def delete_task(self, id):
-        try:
-            sql_statement = "DELETE FROM tasks WHERE rowid = ?"
-            conn = self.get_connection()
-            cur = conn.cursor()
-            cur.execute(sql_statement,[id])
-            conn.commit()
-            cur.execute('VACUUM')
-            conn.commit()
-            cur.close()
-            return 1
-        except:
-            return 0
-    
+        sql_statement = "DELETE FROM tasks WHERE rowid = ?"
+        conn = self.get_connection()
+        cur = conn.cursor()
+        cur.execute(sql_statement, [id])
+        conn.commit()
+        cur.execute('VACUUM')
+        conn.commit()
+        cur.close()
+
     def update_completed(self, task_info):
-        try:
-            sql_statement = "UPDATE tasks SET completed = ? WHERE rowid = ?"
-            conn = self.get_connection()
-            cur = conn.cursor()
-            cur.execute(sql_statement,task_info)
-            conn.commit()
-            cur.close()
-            return 1
-        except:
-            return 0
+        sql_statement = "UPDATE tasks SET completed = ? WHERE rowid = ?"
+        conn = self.get_connection()
+        cur = conn.cursor()
+        cur.execute(sql_statement, task_info)
+        conn.commit()
+        cur.close()
