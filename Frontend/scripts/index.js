@@ -1,6 +1,6 @@
-window.onload = async function(callback) {
+window.addEventListener('load', async function() {
     // Calls the function that makes a get to the API to load all the current tasks
-    var response = await getAllTasks();
+    let response = await getAllTasks();
 
     if (response['error'] != undefined) {
         alert("Error connecting to the DB. Please refresh");
@@ -14,7 +14,7 @@ window.onload = async function(callback) {
         // Calls function that parses all tasks and displays them
         displayTasks(response);
     }
-};
+});
 
 
 // Async function to get the full list of tasks from API
@@ -70,7 +70,7 @@ async function displayTasks(response) {
 
 //
 async function completedClick(element) {
-    var completed;
+    let completed;
     if (element.checked) {
         completed = 1;
     } else {
@@ -149,26 +149,13 @@ async function createTask() {
 
 // Controls what happens when the add button on the bottom of the screen is pushed
 function imageClick() {
-    const classes = document.querySelector("#add-task-button").classList["value"];
+    const classes = document.querySelector("#task-button").classList["value"];
     if (!classes.includes("rotated")) {
-        /*
-                    If more elements are added then this could be used
-        
-        
-                    addElements = document.querySelectorAll(".add-element");
-                    addElements.forEach(function(element){
-                        element.classList.remove("d-none");
-                    });
-                    displayElements = document.querySelectorAll(".display-element");
-                    displayElements.forEach(function(element){
-                        element.classList.add("d-none");
-                    });
-                    */
-        document.querySelector("#add-task-button").classList.add("rotated");
+        document.querySelector("#task-button").classList.add("rotated");
         document.querySelector("#task-form").classList.remove("d-none");
         document.querySelector("#task-list").classList.add("d-none");
     } else {
-        document.querySelector("#add-task-button").classList.remove("rotated");
+        document.querySelector("#task-button").classList.remove("rotated");
         document.querySelector("#task-form").classList.add("d-none");
         document.querySelector("#task-list").classList.remove("d-none");
     }
