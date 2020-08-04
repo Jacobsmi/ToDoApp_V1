@@ -2,17 +2,16 @@
 
 ## Currently Working on
 
-- Add better return JSON from the API for validation client-side
-  - Can now detect the difference between good get from db, good get with no data, and bad get
+- Add a date to the task section/Better add task function
 
 ## To Do
 
 - Create a Taskbar
-- Add a date to the task section/Better add task function
-
 
 ## Completed
 
+- Add better return JSON from the API for validation client-side
+  - Can now detect the difference between good get from db, good get with no data, and bad get
 - Adding completed functionality
 - Created actions for button
   - Hiding table
