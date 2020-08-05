@@ -17,7 +17,8 @@ def createtask():
     if request.method == "POST":
         try:
             task_name = request.json['name']
-            db_insert = task_db.insert_new_task([task_name])
+            task_due = request.json['due']
+            db_insert = task_db.insert_new_task([task_name, task_due])
             return jsonify(success = 'success')
         except:
             return jsonify(error = 'db_error')

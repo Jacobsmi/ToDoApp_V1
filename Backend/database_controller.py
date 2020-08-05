@@ -17,7 +17,7 @@ class Database:
 
     def setup_db(self):
         print("Running setup")
-        sql_statement = """CREATE TABLE IF NOT EXISTS tasks (task_name TEXT, completed INTEGER DEFAULT 0); """
+        sql_statement = """CREATE TABLE IF NOT EXISTS tasks (task_name TEXT, completed INTEGER DEFAULT 0, due_date TEXT); """
         conn = self.get_connection()
         cur = conn.cursor()
         cur.execute(sql_statement)
@@ -26,7 +26,7 @@ class Database:
 
 
     def insert_new_task(self, task_info):
-        sql_statement = "INSERT INTO tasks(task_name) VALUES(?)"
+        sql_statement = "INSERT INTO tasks(task_name, due_date) VALUES(?, ?)"
         conn = self.get_connection()
         cur = conn.cursor()
         cur.execute(sql_statement, task_info)

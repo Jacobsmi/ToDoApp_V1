@@ -30,9 +30,11 @@ const getAllTasks = async() => {
 
 // Displays all tasks in a table by looping through each element received in the response
 const displayTasks = async(response) => {
+    console.log("RESPONSE");
+    console.log(response);
     taskHTML = `<table id="task-list-table">
     <tr>
-        <th>Completed</th><th>Task Number</th><th>Task Name</th><th>Delete</th>
+        <th>Completed</th><th>Task Name</th><th>Due Date</th><th>Delete</th>
     </tr>`;
     // Loops through each element received in the response
     response.forEach(element => {
@@ -44,7 +46,7 @@ const displayTasks = async(response) => {
             taskHTML += `<input type="checkbox" class="completed-check" id="${element[0]}" checked></td>`;
 
         }
-        taskHTML += `<td>${element[0]}</td><td>${element[1]}</td>
+        taskHTML += `<td>${element[1]}</td><td>${element[3]}</td>
         <td> <button type="button" class="delete-button" id="delete-${element[0]}">Delete</button></td></tr>`
 
     });
@@ -123,8 +125,17 @@ const deleteClick = async(id) => {
 
 // Create an async function(allows for await in function)
 const createTask = async() => {
+    taskName = document.querySelector("#task-name").value;
+    taskDue = document.querySelector("#task-due").value;
+    dueParts = taskDue.split("-");
+    taskDue = dueParts[1] + '-' + dueParts[2] + '-' + dueParts[0];
     const data = {
-        'name': document.querySelector("#task-name").value,
+        'name': taskName,
+        'due': taskDue,
+    }
+    if (taskName.length === 0) {
+        alert("Task Name cannot be blank");
+        return;
     }
     const response = await fetch('http://127.0.0.1:5000/createtask', {
         method: 'POST',
@@ -140,20 +151,58 @@ const createTask = async() => {
     location.reload();
 }
 
+const setupForm = () => {
+    // Focuses on the input field
+    document.querySelector("#task-name").focus();
+    // Create a date object so we can set the value min and max for the date field
+    let currentTime = new Date();
+    // Create dateInfo object that holds all the data from the Date() object
+    dateInfo = {
+        year: String(currentTime.getFullYear()),
+        month: String(currentTime.getMonth()).padStart(2, '0'),
+        day: String(currentTime.getDate()).padStart(2, '0'),
+        futureYear: String(currentTime.getFullYear() + 5)
+    };
+    // Create a today string
+    const today = dateInfo.year + '-' + dateInfo.month + '-' + dateInfo.day;
+    // Create a future string
+    const future = dateInfo.futureYear + '-' + dateInfo.month + '-' + dateInfo.day;
+    // Set the value of the Due date
+    document.querySelector("#task-due").value = today;
+    // Set the value of min to toady
+    // Task can not be due in the past
+    document.querySelector("#task-due").min = today;
+    // Set the due date to 5 years in the future
+    document.querySelector("#task-due").max = future;
+}
 
 // Controls what happens when the add button on the bottom of the screen is pushed
 const imageClick = () => {
     const classes = document.querySelector("#task-button").classList["value"];
+    // SWITCHING TO ADD TASK PAGE
     if (!classes.includes("rotated")) {
+        // SET + to x
         document.querySelector("#task-button").classList.add("rotated");
+        // Show the div that holds the form that adds tasks
         document.querySelector("#task-form").classList.remove("d-none");
+        setupForm();
+        // Hide the list of tasks
         document.querySelector("#task-list").classList.add("d-none");
-    } else {
+    }
+    // SWITCHING TO HOMEPAGE 
+    else {
+        // Set x to +
         document.querySelector("#task-button").classList.remove("rotated");
+        // Hiding the task form 
         document.querySelector("#task-form").classList.add("d-none");
+        // Showing the main task
         document.querySelector("#task-list").classList.remove("d-none");
     }
 }
+
+
+
+// Add eventListeners for submitting a new task
 
 // Calls create task whenever someone clicks the button
 document.querySelector("#submit-task-form").addEventListener("click", createTask);
