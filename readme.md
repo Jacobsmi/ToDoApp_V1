@@ -2,16 +2,18 @@
 
 ## Currently Working on
 
-- Add a date to the task section/Better add task function
+- 
 
 ## To Do
 
-- When plus is hit autofocus onto add task
+- Ability to edit current responses
 - Add status codes to API responses for bad input(400)
 - Create a Taskbar
 
 ## Completed
 
+- Add a date to the task section/Better add task function
+- When plus is hit autofocus onto add task
 - Add better return JSON from the API for validation client-side
   - Can now detect the difference between good get from db, good get with no data, and bad get
 - Adding completed functionality
