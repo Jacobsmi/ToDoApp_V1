@@ -1,7 +1,12 @@
 window.addEventListener('load', async function() {
+    setupList();
+});
+
+
+const setupList = async() => {
     // Calls the function that makes a get to the API to load all the current tasks
     let response = await getAllTasks();
-
+    // API error handling
     if (response['error'] != undefined) {
         alert("Error connecting to the DB. Please refresh");
     }
@@ -14,7 +19,7 @@ window.addEventListener('load', async function() {
         // Calls function that parses all tasks and displays them
         displayTasks(response);
     }
-});
+}
 
 
 // Async function to get the full list of tasks from API
@@ -30,10 +35,11 @@ const getAllTasks = async() => {
 
 // Displays all tasks in a table by looping through each element received in the response
 const displayTasks = async(response) => {
-    // Loops through each element received in the response
+    taskHTML = ""
+        // Loops through each element received in the response
     response.forEach(element => {
         // Creates a string for it the element with its information
-        taskHTML = `<div class="task-card" id="${element[0]}">`;
+        taskHTML += `<div class="task-card" id="${element[0]}">`;
         taskHTML += `<h4 class="card-title">Task Name: ${element[1]}</h4>`
         taskHTML += `<h4 class="card-due-date">Due Date: ${element[3]}</h4>`
         if (element[2] === 0) {
@@ -68,13 +74,17 @@ const displayTasks = async(response) => {
 
 //
 const completedClick = async(element) => {
+    //  Parse the rowID and completed num
     elemParts = element.id.split("-");
+    // Find the right new value for completed
     let completed = 0;
     if (elemParts[0] == 0) {
         completed = 1;
     }
+    // Set new completed value in DB
     await updateCompletion(parseInt(elemParts[1]), completed);
-    location.reload();
+    // Redraw the elements without reloading the page
+    setupList();
 }
 
 
@@ -179,6 +189,7 @@ const imageClick = () => {
         document.querySelector("#task-button").classList.add("rotated");
         // Show the div that holds the form that adds tasks
         document.querySelector("#task-form").classList.remove("d-none");
+        // Calls the function that setups the form with proper values
         setupForm();
         // Hide the list of tasks
         document.querySelector("#task-list").classList.add("d-none");

@@ -51,6 +51,11 @@ body {
     transform: rotate(45deg);
 }
 
+#task-list {
+    display: grid;
+    grid-template-columns: 33vw 33vw 33vw;
+}
+
 .task-card {
     background-color: #e9c46a;
     width: max-content;
