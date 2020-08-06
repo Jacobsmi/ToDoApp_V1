@@ -2,7 +2,7 @@
 
 ## Currently Working on
 
-- 
+- Style the Task Form Page
 
 ## To Do
 
@@ -12,6 +12,7 @@
 
 ## Completed
 
+- Add grid layout to the task-list section
 - Add a date to the task section/Better add task function
 - When plus is hit autofocus onto add task
 - Add better return JSON from the API for validation client-side
