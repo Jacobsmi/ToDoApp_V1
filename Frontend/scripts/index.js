@@ -30,33 +30,27 @@ const getAllTasks = async() => {
 
 // Displays all tasks in a table by looping through each element received in the response
 const displayTasks = async(response) => {
-    console.log("RESPONSE");
-    console.log(response);
-    taskHTML = `<table id="task-list-table">
-    <tr>
-        <th>Completed</th><th>Task Name</th><th>Due Date</th><th>Delete</th>
-    </tr>`;
     // Loops through each element received in the response
     response.forEach(element => {
         // Creates a string for it the element with its information
-        taskHTML += '<tr><td>'
+        taskHTML = `<div class="task-card" id="${element[0]}">`;
+        taskHTML += `<h4 class="card-title">Task Name: ${element[1]}</h4>`
+        taskHTML += `<h4 class="card-due-date">Due Date: ${element[3]}</h4>`
         if (element[2] === 0) {
-            taskHTML += `<input type="checkbox" class="completed-check" id="${element[0]}"></td>`;
+            taskHTML += `<h4 class="card-status">In Progress</h4>`
         } else {
-            taskHTML += `<input type="checkbox" class="completed-check" id="${element[0]}" checked></td>`;
-
+            taskHTML += `<h4 class="card-status">Completed!</h4>`
         }
-        taskHTML += `<td>${element[1]}</td><td>${element[3]}</td>
-        <td> <button type="button" class="delete-button" id="delete-${element[0]}">Delete</button></td></tr>`
+        taskHTML += `<button type="button" class="complete-button" id="${element[2]}-${element[0]}">Complete</button>
+        <button type="button" class="delete-button" id="delete-${element[0]}">Delete</button></div>`
 
     });
-    taskHTML += '</table>';
 
     // Sets the HTML for the task-list div equal to the HTML for all the items
     document.querySelector("#task-list").innerHTML = taskHTML;
     // Adds eventlistener to all completed checkboxes and 
     // calls the checkBox click handler when any of the checkBoxes are clicked
-    document.querySelectorAll(".completed-check").forEach(element => {
+    document.querySelectorAll(".complete-button").forEach(element => {
         element.addEventListener("click", () => {
             completedClick(element);
         });
@@ -74,13 +68,13 @@ const displayTasks = async(response) => {
 
 //
 const completedClick = async(element) => {
-    let completed;
-    if (element.checked) {
+    elemParts = element.id.split("-");
+    let completed = 0;
+    if (elemParts[0] == 0) {
         completed = 1;
-    } else {
-        completed = 0;
     }
-    await updateCompletion(parseInt(element.id), completed)
+    await updateCompletion(parseInt(elemParts[1]), completed);
+    location.reload();
 }
 
 

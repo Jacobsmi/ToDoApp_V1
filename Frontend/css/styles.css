@@ -51,10 +51,25 @@ body {
     transform: rotate(45deg);
 }
 
-#taskbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 3vh;
-    background-color: #000;
+.task-card {
+    background-color: #e9c46a;
+    width: max-content;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-top: 0.1vh;
+    padding-bottom: 1vh;
+    border: 1px none;
+    border-radius: 1vw;
+}
+
+.card-title {
+    border-bottom: 1px solid black;
+}
+
+.card-due-date {
+    border-bottom: 1px solid black;
+}
+
+.card-status {
+    border-bottom: 1px solid black;
 }
