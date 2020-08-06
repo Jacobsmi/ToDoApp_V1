@@ -21,6 +21,13 @@ body {
     display: none;
 }
 
+.list {
+    text-align: center;
+    display: grid;
+    grid-template-columns: 25vw 25vw 25vw 25vw;
+    grid-row-gap: 2vh;
+}
+
 #task-list-table {
     margin-left: auto;
     margin-right: auto;
@@ -43,22 +50,13 @@ body {
     border-left: none;
 }
 
-#task-list {
-    text-align: center;
-}
-
 .rotated {
     transform: rotate(45deg);
 }
 
-#task-list {
-    display: grid;
-    grid-template-columns: 33vw 33vw 33vw;
-}
-
 .task-card {
     background-color: #e9c46a;
-    width: max-content;
+    width: 20vw;
     padding-left: 1vw;
     padding-right: 1vw;
     padding-top: 0.1vh;

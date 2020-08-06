@@ -43,9 +43,9 @@ const displayTasks = async(response) => {
         taskHTML += `<h4 class="card-title">Task Name: ${element[1]}</h4>`
         taskHTML += `<h4 class="card-due-date">Due Date: ${element[3]}</h4>`
         if (element[2] === 0) {
-            taskHTML += `<h4 class="card-status">In Progress</h4>`
+            taskHTML += `<h4 class="card-status">Status: In Progress</h4>`
         } else {
-            taskHTML += `<h4 class="card-status">Completed!</h4>`
+            taskHTML += `<h4 class="card-status">Status: Completed!</h4>`
         }
         taskHTML += `<button type="button" class="complete-button" id="${element[2]}-${element[0]}">Complete</button>
         <button type="button" class="delete-button" id="delete-${element[0]}">Delete</button></div>`
@@ -192,6 +192,7 @@ const imageClick = () => {
         // Calls the function that setups the form with proper values
         setupForm();
         // Hide the list of tasks
+        document.querySelector("#task-list").classList.remove("list");
         document.querySelector("#task-list").classList.add("d-none");
     }
     // SWITCHING TO HOMEPAGE 
@@ -201,6 +202,7 @@ const imageClick = () => {
         // Hiding the task form 
         document.querySelector("#task-form").classList.add("d-none");
         // Showing the main task
+        document.querySelector("#task-list").classList.add("list");
         document.querySelector("#task-list").classList.remove("d-none");
     }
 }
