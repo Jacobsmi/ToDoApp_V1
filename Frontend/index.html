@@ -2,13 +2,16 @@
 
 <head>
     <link rel="stylesheet" href="./css/styles.css">
+    <title>Michael's To Do App</title>
 </head>
 
 <body>
-    <h1 id="main-title">To Do App</h1>
+    <div id="main-title-container" class="center-block">
+        <h1 id="main-title">To Do App</h1>
+    </div>
     <div id="task-form" class="task-form add-element d-none">
         Task Name:<input type="text" id="task-name">
-        <input type="date" id="task-due" value="2018-07-22" min="2018-01-01" max="2018-12-31">
+        <input type="date" id="task-due" value="2018-07-22" min="2018-01-01" max="2018-12-31"><br><br>
         <button type="button" id="submit-task-form">Submit</button>
     </div>
 

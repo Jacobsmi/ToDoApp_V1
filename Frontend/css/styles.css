@@ -7,8 +7,20 @@ body {
 }
 
 #main-title {
+    background-color: #e9c46a;
     margin-top: 2vh;
-    text-align: center;
+    padding-bottom: 1vh;
+    padding-top: 1vh;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    border: 1px none;
+    border-radius: 1vw;
+}
+
+#main-title-container {
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #task-button {
@@ -76,6 +88,17 @@ body {
 
 .card-status {
     border-bottom: 1px solid black;
+}
+
+#task-form {
+    width: max-content;
+    background-color: #e9c46a;
+    padding-bottom: 1vh;
+    padding-top: 1vh;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    border: 1px none;
+    border-radius: 1vw;
 }
 
 .center-block {
