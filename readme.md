@@ -2,18 +2,21 @@
 
 ## Currently Working on
 
-- Style the Task Form Page
+- Add overdue status to cards
+- Display Due number of days as well as Date
 
 ## To Do
 
 - Deploy API to Heroku or AWS
 - Ability to edit current responses
+- Add ability to do overdue
 - Add sort by function(due date, completed/not completed, submitted etc)
 - Add status codes to API responses for bad input(400)
 - (Maybe)Create a Taskbar
 
 ## Completed
 
+- Style the Task Form Page
 - Add grid layout to the task-list section
 - Add a date to the task section/Better add task function
 - When plus is hit autofocus onto add task

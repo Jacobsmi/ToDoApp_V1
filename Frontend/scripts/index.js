@@ -13,9 +13,10 @@ const setupList = async() => {
     // Checks if the list is empty
     else if (response.length === 0) {
         // Displays message on empty task list
-        document.querySelector("#task-list").innerHTML = `<h3>No tasks in database</h3><br>
+        document.querySelector("#task-empty").innerHTML = `<h3>No tasks in database</h3><br>
         <h4>Please add a task by clicking the plus in the bottom left corner</h4>`;
     } else {
+        document.querySelector("#task-empty").innerHTML = "";
         // Calls function that parses all tasks and displays them
         displayTasks(response);
     }
@@ -163,7 +164,7 @@ const setupForm = () => {
     // Create dateInfo object that holds all the data from the Date() object
     dateInfo = {
         year: String(currentTime.getFullYear()),
-        month: String(currentTime.getMonth()).padStart(2, '0'),
+        month: String(currentTime.getMonth() + 1).padStart(2, '0'),
         day: String(currentTime.getDate()).padStart(2, '0'),
         futureYear: String(currentTime.getFullYear() + 5)
     };
@@ -196,6 +197,9 @@ const imageClick = () => {
         // Hide the list of tasks
         document.querySelector("#task-list").classList.remove("list");
         document.querySelector("#task-list").classList.add("d-none");
+
+        // Hide the empty text
+        document.querySelector("#task-empty").classList.add("d-none");
     }
     // SWITCHING TO HOMEPAGE 
     else {
@@ -207,6 +211,8 @@ const imageClick = () => {
         // Showing the main task
         document.querySelector("#task-list").classList.add("list");
         document.querySelector("#task-list").classList.remove("d-none");
+
+        document.querySelector("#task-empty").classList.remove("d-none");
     }
 }
 

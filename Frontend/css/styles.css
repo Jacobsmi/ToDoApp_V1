@@ -1,13 +1,13 @@
 body {
     margin: 0;
-    background-color: #264653;
+    background-color: #f1faee;
     font-family: 'Lato', sans-serif;
     font-size: 1.5vw;
     text-align: center;
 }
 
 #main-title {
-    background-color: #e9c46a;
+    background-color: #a8dadc;
     margin-top: 2vh;
     padding-bottom: 1vh;
     padding-top: 1vh;
@@ -45,7 +45,6 @@ body {
     margin-left: auto;
     margin-right: auto;
     width: 50vw;
-    background-color: #2A9D8F;
     text-align: center;
     border: none;
     border-collapse: collapse
@@ -68,7 +67,7 @@ body {
 }
 
 .task-card {
-    background-color: #e9c46a;
+    background-color: #a8dadc;
     width: 20vw;
     padding-left: 1vw;
     padding-right: 1vw;
@@ -92,7 +91,7 @@ body {
 
 #task-form {
     width: max-content;
-    background-color: #e9c46a;
+    background-color: #457b9d;
     padding-bottom: 1vh;
     padding-top: 1vh;
     padding-left: 1vw;
