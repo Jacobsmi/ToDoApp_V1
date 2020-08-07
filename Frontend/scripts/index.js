@@ -189,6 +189,8 @@ const imageClick = () => {
         document.querySelector("#task-button").classList.add("rotated");
         // Show the div that holds the form that adds tasks
         document.querySelector("#task-form").classList.remove("d-none");
+        document.querySelector("#task-form").classList.add("center-block");
+
         // Calls the function that setups the form with proper values
         setupForm();
         // Hide the list of tasks
@@ -201,6 +203,7 @@ const imageClick = () => {
         document.querySelector("#task-button").classList.remove("rotated");
         // Hiding the task form 
         document.querySelector("#task-form").classList.add("d-none");
+        document.querySelector("#task-form").classList.remove("center-block");
         // Showing the main task
         document.querySelector("#task-list").classList.add("list");
         document.querySelector("#task-list").classList.remove("d-none");

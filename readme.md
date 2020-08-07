@@ -6,9 +6,11 @@
 
 ## To Do
 
+- Deploy API to Heroku or AWS
 - Ability to edit current responses
+- Add sort by function(due date, completed/not completed, submitted etc)
 - Add status codes to API responses for bad input(400)
-- Create a Taskbar
+- (Maybe)Create a Taskbar
 
 ## Completed
 
