@@ -34,15 +34,20 @@ const getAllTasks = async() => {
 }
 
 const processDate = dueDate => {
-    let ret_str = `Due Date: ${dueDate}`;
+    let ret_str = "";
+    let dateParts = dueDate.split("-");
     let dDate = new Date(parseInt(dateParts[2]), parseInt(dateParts[0]) - 1, parseInt(dateParts[1]));
     let currentDate = new Date();
     let differnce = dDate.getTime() - currentDate.getTime();
     let diffDays = parseInt((differnce / (1000)) / 86400) + 1
-    if (diffDays < 8) {
-        ret_str += (`<br>!!!Only ${diffDays} days left!!!`);
+    if (diffDays == 0) {
+        return "DUE TODAY";
+    } else if (diffDays < 0) {
+        return "OVERDUE";
+    } else if (0 > diffDays < 8) {
+        return (`Due Date: ${dueDate}<br>!!!Only ${diffDays} days left!!!`);
     }
-    return ret_str
+    return `Due Date: ${dueDate}`;
 }
 
 // Displays all tasks in a table by looping through each element received in the response
