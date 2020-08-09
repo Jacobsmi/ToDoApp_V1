@@ -238,34 +238,36 @@ const imageClick = () => {
         document.querySelector("#task-button").classList.add("rotated");
         // Calls the function that setups the form with proper values
         setupForm();
-        // Show the div that holds the form that adds tasks
-        document.querySelector("#task-form").classList.remove("d-none");
-        document.querySelector("#task-form").classList.add("center-block");
-        // Hide the list of tasks
-        document.querySelector("#uncompleted-task-list").classList.remove("list");
-        document.querySelector("#uncompleted-task-list").classList.add("d-none");
 
-        document.querySelector("#completed-task-list").classList.remove("list");
-        document.querySelector("#completed-task-list").classList.add("d-none");
-
-        // Hide the empty text
-        document.querySelector("#task-empty").classList.add("d-none");
+        document.querySelectorAll(".first-page").forEach(element=>{
+            if (element.classList["value"].includes("list")){
+                element.classList.remove("list");
+            }
+            element.classList.add("d-none");
+        });
+        // Showing new elements
+        document.querySelectorAll(".second-page").forEach(element=>{
+            if (element.id === "task-form"){
+                element.classList.add("center-block")
+            }
+            element.classList.remove("d-none");
+        });
     }
     // SWITCHING TO HOMEPAGE 
     else {
-        // Set x to +
         document.querySelector("#task-button").classList.remove("rotated");
-        // Hiding the task form 
-        document.querySelector("#task-form").classList.add("d-none");
-        document.querySelector("#task-form").classList.remove("center-block");
-        // Showing the main task
-        document.querySelector("#uncompleted-task-list").classList.add("list");
-        document.querySelector("#uncompleted-task-list").classList.remove("d-none");
-
-        document.querySelector("#completed-task-list").classList.add("list");
-        document.querySelector("#completed-task-list").classList.remove("d-none");
-
-        document.querySelector("#task-empty").classList.remove("d-none");
+        document.querySelectorAll(".first-page").forEach(element=>{
+            if (element.id.includes("list")){
+                element.classList.add("list");
+            }
+            element.classList.remove("d-none");
+        });
+        document.querySelectorAll(".second-page").forEach(element=>{
+            if (element.id.includes("form")){
+                element.classList.remove("center-block");
+            }
+            element.classList.add("d-none");
+        });
     }
 }
 

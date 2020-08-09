@@ -18,7 +18,7 @@ def createtask():
         try:
             task_name = request.json['name']
             task_due = request.json['due']
-            db_insert = task_db.insert_new_task([task_name, task_due])
+            task_db.insert_new_task([task_name, task_due])
             return jsonify(success = 'success')
         except:
             return jsonify(error = 'db_error')
@@ -38,7 +38,7 @@ def get_all_tasks():
 @API.route('/deleteTask' , methods=['DELETE'])
 def deleteTask():
     try:
-        result = task_db.delete_task(request.json['id'])
+        task_db.delete_task(request.json['id'])
         return jsonify(success = 'success')
     except:
         return jsonify(error='db_error')
