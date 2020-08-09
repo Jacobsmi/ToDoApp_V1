@@ -35,10 +35,6 @@ const getAllTasks = async() => {
 
 const processDate = dueDate => {
     let ret_str = `Due Date: ${dueDate}`;
-    let dateParts = dueDate.split("-");
-    let dMonth = parseInt(dateParts[0]);
-    let dDay = parseInt(dateParts[1]);
-    let dYear = parseInt(dateParts[2]);
     let dDate = new Date(parseInt(dateParts[2]), parseInt(dateParts[0]) - 1, parseInt(dateParts[1]));
     let currentDate = new Date();
     let differnce = dDate.getTime() - currentDate.getTime();

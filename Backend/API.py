@@ -49,7 +49,7 @@ def completeTask():
         try:
             rowid = int(request.json['id'])
             completed = int(request.json['completed'])
-            print(task_db.update_completed([completed, rowid]))
+            task_db.update_completed([completed, rowid])
             return jsonify(success = 'success')
         except:
             return jsonify(error='db_error')
