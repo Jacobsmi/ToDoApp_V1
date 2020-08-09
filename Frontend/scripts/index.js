@@ -33,6 +33,21 @@ const getAllTasks = async() => {
     return responseJSON;
 }
 
+const processDate = dueDate => {
+    let ret_str = `Due Date: ${dueDate}`;
+    let dateParts = dueDate.split("-");
+    let dMonth = parseInt(dateParts[0]);
+    let dDay = parseInt(dateParts[1]);
+    let dYear = parseInt(dateParts[2]);
+    let dDate = new Date(parseInt(dateParts[2]), parseInt(dateParts[0]) - 1, parseInt(dateParts[1]));
+    let currentDate = new Date();
+    let differnce = dDate.getTime() - currentDate.getTime();
+    let diffDays = parseInt((differnce / (1000)) / 86400) + 1
+    if (diffDays < 8) {
+        ret_str += (`<br>!!!Only ${diffDays} days left!!!`);
+    }
+    return ret_str
+}
 
 // Displays all tasks in a table by looping through each element received in the response
 const displayTasks = async(response) => {
@@ -40,9 +55,10 @@ const displayTasks = async(response) => {
         // Loops through each element received in the response
     response.forEach(element => {
         // Creates a string for it the element with its information
+        due_str = processDate(element[3]);
         taskHTML += `<div class="task-card" id="${element[0]}">`;
         taskHTML += `<h4 class="card-title">Task Name: ${element[1]}</h4>`
-        taskHTML += `<h4 class="card-due-date">Due Date: ${element[3]}</h4>`
+        taskHTML += `<h4 class="card-due-date">${due_str}</h4>`
         if (element[2] === 0) {
             taskHTML += `<h4 class="card-status">Status: In Progress</h4>`
         } else {
