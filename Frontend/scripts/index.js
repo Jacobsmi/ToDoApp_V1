@@ -34,6 +34,62 @@ const getAllTasks = async() => {
 }
 
 
+// Displays all tasks in a table by looping through each element received in the response
+const displayTasks = async(response) => {
+    /*
+    element array:
+    [0] => Task ID
+    [1] => Task Name
+    [2] => Completed Status(0 for not completed, 1 for completed)
+    [3] => Due Date string
+    */
+    // Loops through each element received in the response
+    uncompletedTaskHTML = "";
+    completedTaskHTML = "";
+    response.forEach(element => {
+        due_str = processDate(element[3]);
+        if (element[2] == 0) {
+            // Creates a string for it the element with its information
+            uncompletedTaskHTML += `<div class="task-card" id="${element[0]}">`;
+            uncompletedTaskHTML += `<h4 class="card-title">Task Name: ${element[1]}</h4>`
+            uncompletedTaskHTML += `<h4 class="card-due-date">${due_str}</h4>`
+            uncompletedTaskHTML += `<h4 class="card-status">Status: In Progress</h4>`
+            uncompletedTaskHTML += `<button type="button" class="complete-button" id="${element[2]}-${element[0]}">Complete</button>
+        <button type="button" class="delete-button" id="delete-${element[0]}">Delete</button></div>`
+        } else if (element[2] == 1) {
+            completedTaskHTML += `<div class="task-card" id="${element[0]}">`;
+            completedTaskHTML += `<h4 class="card-title">Task Name: ${element[1]}</h4>`
+            completedTaskHTML += `<h4 class="card-due-date">${due_str}</h4>`
+            completedTaskHTML += `<h4 class="card-status">Status: Completed!</h4>`
+            completedTaskHTML += `<button type="button" class="complete-button" id="${element[2]}-${element[0]}">Uncomplete</button>
+        <button type="button" class="delete-button" id="delete-${element[0]}">Delete</button></div>`
+        }
+
+    });
+
+    // Sets the HTML for the task-list div equal to the HTML for all the items
+    document.querySelector("#uncompleted-task-list").innerHTML = uncompletedTaskHTML;
+    // Sets the HTML for the task-list div equal to the HTML for all the items
+    document.querySelector("#completed-task-list").innerHTML = completedTaskHTML;
+
+    // Adds eventlistener to all completed checkboxes and 
+    // calls the checkBox click handler when any of the checkBoxes are clicked
+    document.querySelectorAll(".complete-button").forEach(element => {
+        element.addEventListener("click", () => {
+            completedClick(element);
+        });
+    });
+    // Adds eventlistener to all delete buttons and 
+    // calls the delete button click handler when any of the delete buttons are clicked
+    document.querySelectorAll(".delete-button").forEach(element => {
+        element.addEventListener("click", () => {
+            deleteClick(element.id)
+        });
+    });
+
+}
+
+
 // Function that takes the dueDate string and determines how far away the due date is from the current day
 // depending on how far the day is determines what displays on the task card
 const processDate = dueDate => {
@@ -56,51 +112,13 @@ const processDate = dueDate => {
         return "OVERDUE";
     }
     // If the due date is less than 7 days away
-    else if (0 > diffDays < 8) {
+    else if (diffDays > 0 && diffDays < 8) {
         return (`Due Date: ${dueDate}<br>!!!Only ${diffDays} days left!!!`);
     }
     // If the due date is more than 7 days away
     return `Due Date: ${dueDate}`;
 }
 
-// Displays all tasks in a table by looping through each element received in the response
-const displayTasks = async(response) => {
-    taskHTML = ""
-        // Loops through each element received in the response
-    response.forEach(element => {
-        // Creates a string for it the element with its information
-        due_str = processDate(element[3]);
-        taskHTML += `<div class="task-card" id="${element[0]}">`;
-        taskHTML += `<h4 class="card-title">Task Name: ${element[1]}</h4>`
-        taskHTML += `<h4 class="card-due-date">${due_str}</h4>`
-        if (element[2] === 0) {
-            taskHTML += `<h4 class="card-status">Status: In Progress</h4>`
-        } else {
-            taskHTML += `<h4 class="card-status">Status: Completed!</h4>`
-        }
-        taskHTML += `<button type="button" class="complete-button" id="${element[2]}-${element[0]}">Complete</button>
-        <button type="button" class="delete-button" id="delete-${element[0]}">Delete</button></div>`
-
-    });
-
-    // Sets the HTML for the task-list div equal to the HTML for all the items
-    document.querySelector("#task-list").innerHTML = taskHTML;
-    // Adds eventlistener to all completed checkboxes and 
-    // calls the checkBox click handler when any of the checkBoxes are clicked
-    document.querySelectorAll(".complete-button").forEach(element => {
-        element.addEventListener("click", () => {
-            completedClick(element);
-        });
-    });
-    // Adds eventlistener to all delete buttons and 
-    // calls the delete button click handler when any of the delete buttons are clicked
-    document.querySelectorAll(".delete-button").forEach(element => {
-        element.addEventListener("click", () => {
-            deleteClick(element.id)
-        });
-    });
-
-}
 
 
 //
@@ -218,15 +236,17 @@ const imageClick = () => {
     if (!classes.includes("rotated")) {
         // SET + to x
         document.querySelector("#task-button").classList.add("rotated");
+        // Calls the function that setups the form with proper values
+        setupForm();
         // Show the div that holds the form that adds tasks
         document.querySelector("#task-form").classList.remove("d-none");
         document.querySelector("#task-form").classList.add("center-block");
-
-        // Calls the function that setups the form with proper values
-        setupForm();
         // Hide the list of tasks
-        document.querySelector("#task-list").classList.remove("list");
-        document.querySelector("#task-list").classList.add("d-none");
+        document.querySelector("#uncompleted-task-list").classList.remove("list");
+        document.querySelector("#uncompleted-task-list").classList.add("d-none");
+
+        document.querySelector("#completed-task-list").classList.remove("list");
+        document.querySelector("#completed-task-list").classList.add("d-none");
 
         // Hide the empty text
         document.querySelector("#task-empty").classList.add("d-none");
@@ -239,8 +259,11 @@ const imageClick = () => {
         document.querySelector("#task-form").classList.add("d-none");
         document.querySelector("#task-form").classList.remove("center-block");
         // Showing the main task
-        document.querySelector("#task-list").classList.add("list");
-        document.querySelector("#task-list").classList.remove("d-none");
+        document.querySelector("#uncompleted-task-list").classList.add("list");
+        document.querySelector("#uncompleted-task-list").classList.remove("d-none");
+
+        document.querySelector("#completed-task-list").classList.add("list");
+        document.querySelector("#completed-task-list").classList.remove("d-none");
 
         document.querySelector("#task-empty").classList.remove("d-none");
     }

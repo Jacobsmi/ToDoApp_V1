@@ -2,8 +2,7 @@
 
 ## Currently Working on
 
-- Add overdue status to cards
-- Display Due number of days as well as Date
+- Make it so cards display in 1 column on mobile
 
 ## To Do
 
@@ -16,6 +15,9 @@
 
 ## Completed
 
+- Displaying 'Completed' tasks in a separate location
+- Add overdue status to cards
+- Display Due number of days as well as Date
 - Style the Task Form Page
 - Add grid layout to the task-list section
 - Add a date to the task section/Better add task function
