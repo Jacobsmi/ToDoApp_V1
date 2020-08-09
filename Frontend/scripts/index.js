@@ -33,20 +33,33 @@ const getAllTasks = async() => {
     return responseJSON;
 }
 
+
+// Function that takes the dueDate string and determines how far away the due date is from the current day
+// depending on how far the day is determines what displays on the task card
 const processDate = dueDate => {
-    let ret_str = "";
+    // Turn dueDate string into individual parts
     let dateParts = dueDate.split("-");
+    // Create dueDate as a new Date object
     let dDate = new Date(parseInt(dateParts[2]), parseInt(dateParts[0]) - 1, parseInt(dateParts[1]));
+    // Create a Date object with the current time
     let currentDate = new Date();
+    // Find the difference in milliseconds turn that into seconds and then days
+    // Then turn that into an int and round up
     let differnce = dDate.getTime() - currentDate.getTime();
     let diffDays = parseInt((differnce / (1000)) / 86400) + 1
+        // If the due date is today
     if (diffDays == 0) {
         return "DUE TODAY";
-    } else if (diffDays < 0) {
+    }
+    // If the due date has passed 
+    else if (diffDays < 0) {
         return "OVERDUE";
-    } else if (0 > diffDays < 8) {
+    }
+    // If the due date is less than 7 days away
+    else if (0 > diffDays < 8) {
         return (`Due Date: ${dueDate}<br>!!!Only ${diffDays} days left!!!`);
     }
+    // If the due date is more than 7 days away
     return `Due Date: ${dueDate}`;
 }
 
