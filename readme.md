@@ -3,6 +3,7 @@
 ## Currently Working on
 
 - Make it so cards display in 1 column on mobile
+- Looking at hosting options and learning about cloud hosting 
 
 ## To Do
 
