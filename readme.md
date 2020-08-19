@@ -2,11 +2,12 @@
 
 ## Currently Working on
 
-- Make it so cards display in 1 column on mobile
+- Still trying to figure out options for hosting backend with DB
 - Looking at hosting options and learning about cloud hosting 
 
 ## To Do
 
+- Make it so cards display in 1 column on mobile
 - Deploy API to Heroku or AWS
 - Ability to edit current responses
 - Add ability to do overdue
